@@ -1,22 +1,17 @@
-<script>
-	import Nav from '../components/Nav.svelte';
-
-	export let segment;
-</script>
-
-<style>
-	main {
-		position: relative;
-		max-width: 56em;
-		background-color: white;
-		padding: 2em;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-</style>
-
-<Nav {segment}/>
-
 <main>
-	<slot></slot>
+  <ul class="flex">
+    <li class="mr-6">
+      <a class="text-blue-500 hover:text-blue-800" href="#">Active</a>
+    </li>
+    <li class="mr-6">
+      <a class="text-blue-500 hover:text-blue-800" href="#">Link</a>
+    </li>
+    <li class="mr-6">
+      <a class="text-blue-500 hover:text-blue-800" href="#">Link</a>
+    </li>
+    <li class="mr-6">
+      <a class="text-gray-400 cursor-not-allowed" href="#">Disabled</a>
+    </li>
+  </ul>
+	<slot />
 </main>
