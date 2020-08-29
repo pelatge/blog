@@ -7,6 +7,7 @@ import { terser } from "rollup-plugin-terser";
 import config from "sapper/config/rollup.js";
 import pkg from "./package.json";
 import autoPreprocess from "svelte-preprocess";
+import sapperEnv from "sapper-environment";
 
 const mode = process.env.NODE_ENV;
 const dev = mode === "development";
@@ -24,18 +25,19 @@ export default {
     output: config.client.output(),
     plugins: [
       replace({
+        ...sapperEnv(),
         "process.browser": true,
-        "process.env.NODE_ENV": JSON.stringify(mode)
+        "process.env.NODE_ENV": JSON.stringify(mode),
       }),
       svelte({
         dev,
         hydratable: true,
         emitCss: true,
-        preprocess: autoPreprocess()
+        preprocess: autoPreprocess(),
       }),
       resolve({
         browser: true,
-        dedupe: ["svelte"]
+        dedupe: ["svelte"],
       }),
       commonjs(),
 
@@ -48,29 +50,29 @@ export default {
             [
               "@babel/preset-env",
               {
-                targets: "> 0.25%, not dead"
-              }
-            ]
+                targets: "> 0.25%, not dead",
+              },
+            ],
           ],
           plugins: [
             "@babel/plugin-syntax-dynamic-import",
             [
               "@babel/plugin-transform-runtime",
               {
-                useESModules: true
-              }
-            ]
-          ]
+                useESModules: true,
+              },
+            ],
+          ],
         }),
 
       !dev &&
         terser({
-          module: true
-        })
+          module: true,
+        }),
     ],
 
     preserveEntrySignatures: false,
-    onwarn
+    onwarn,
   },
 
   server: {
@@ -79,25 +81,25 @@ export default {
     plugins: [
       replace({
         "process.browser": false,
-        "process.env.NODE_ENV": JSON.stringify(mode)
+        "process.env.NODE_ENV": JSON.stringify(mode),
       }),
       svelte({
         generate: "ssr",
         hydratable: true,
         dev,
-        preprocess: autoPreprocess()
+        preprocess: autoPreprocess(),
       }),
       resolve({
-        dedupe: ["svelte"]
+        dedupe: ["svelte"],
       }),
-      commonjs()
+      commonjs(),
     ],
     external: Object.keys(pkg.dependencies).concat(
       require("module").builtinModules
     ),
 
     preserveEntrySignatures: "strict",
-    onwarn
+    onwarn,
   },
 
   serviceworker: {
@@ -107,13 +109,13 @@ export default {
       resolve(),
       replace({
         "process.browser": true,
-        "process.env.NODE_ENV": JSON.stringify(mode)
+        "process.env.NODE_ENV": JSON.stringify(mode),
       }),
       commonjs(),
-      !dev && terser()
+      !dev && terser(),
     ],
 
     preserveEntrySignatures: false,
-    onwarn
-  }
+    onwarn,
+  },
 };

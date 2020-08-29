@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>REVAMP</title>
+	<title>Nusendra.com | Home</title>
 </svelte:head>
 
 <div class="container w-full md:max-w-3xl mx-auto pt-10 pb-10">
@@ -12,5 +12,7 @@
 </div>
 
 <script lang="typescript">
-  let a: number = 20;
+  let stories: Array<any> = [];
+
+  console.log(stories);
 </script>
