@@ -1,15 +1,15 @@
 ---
-title: 'Menyematkan Data pada Vue Slot'
+title: "Menyematkan Data pada Vue Slot"
 date: 2020-03-26 06:00:00
-description: 'Catatan singkat tentang cara menyematkan sebuah attribute atau data kedalam vue slot'
-tags: ['vuejs', javascript']
+description: "Catatan singkat tentang cara menyematkan sebuah attribute atau data kedalam vue slot"
+tags: ["vuejs", "javascript"]
 draft: false
 slug: menyematkan-data-pada-vue-slot
 ---
 
 Kali ini mau ngebahas singkat aja nih, tentang bagaimana cara menyematkan sebuah attribute atau data kedalam vue slot, karena fitur ini sering kali terdapat perubahan di sisi sintaks vue nya, jadi rasanya perlu saya catat juga di blog ini. Kenapa perlu dicatat? Karena saya sendiri ga pernah menghafal sintaks.
 
-Nah kasus nya kemarin lagi develop app pake vue dan membutuhkan slot, secara konsep paham dan langsung tulis aja sintaks nya, eh ternyata dapet error karena sintaks salah. Haha yaudah deh langsung buka gugel buat beresin problem ini. Eh masalah baru muncul, kebanyakan artikel mengenai vue slot ini tidak konsisten versi vue nya, ada yang dibawah 2.6, ada yang 2.6 dll. Ternyata masih ada blog yang tidak di update dari sisi sintaks nya, yang mana sintaks itu udah *deprecated*.
+Nah kasus nya kemarin lagi develop app pake vue dan membutuhkan slot, secara konsep paham dan langsung tulis aja sintaks nya, eh ternyata dapet error karena sintaks salah. Haha yaudah deh langsung buka gugel buat beresin problem ini. Eh masalah baru muncul, kebanyakan artikel mengenai vue slot ini tidak konsisten versi vue nya, ada yang dibawah 2.6, ada yang 2.6 dll. Ternyata masih ada blog yang tidak di update dari sisi sintaks nya, yang mana sintaks itu udah _deprecated_.
 
 ## Basic Slot
 
@@ -47,7 +47,7 @@ export default {
 </script>
 ```
 
-Nah jika temen temen lihat, didalam child component itu saya sematkan sebuah button, yang mana button itu akan di *inject* atau disematkan kedalam child component. Nah nanti ketika di render akan jadi seperti ini
+Nah jika temen temen lihat, didalam child component itu saya sematkan sebuah button, yang mana button itu akan di _inject_ atau disematkan kedalam child component. Nah nanti ketika di render akan jadi seperti ini
 
 ```vue
 <!-- Child Component -->
@@ -66,7 +66,7 @@ Dari sini paham ya? Awas kalau masih belom paham, lu yang gue hajar haha.
 
 ## Scoped Slot
 
-Scoped slot ini berfungsi untuk melempar / *passing* data / attribute dari slot ke parent nya. Langsung ke contoh aja yak biar makain paham.
+Scoped slot ini berfungsi untuk melempar / _passing_ data / attribute dari slot ke parent nya. Langsung ke contoh aja yak biar makain paham.
 
 ```vue
 <!-- Child Component -->
@@ -88,8 +88,8 @@ Scoped slot ini berfungsi untuk melempar / *passing* data / attribute dari slot 
 export default {
   data: () => ({
     pertamax: "ini slot pertamax",
-    keduax: "ini slot keduax"
-  })
+    keduax: "ini slot keduax",
+  }),
 };
 </script>
 ```

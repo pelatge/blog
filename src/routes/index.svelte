@@ -1,17 +1,20 @@
 <script context="module">
   export function preload({ params, query }) {
     return this.fetch(`post.json`)
-      .then(r => r.json())
-      .then(posts => {
-        const xml = this.fetch('sitemap.xml')
+      .then((r) => r.json())
+      .then((posts) => {
+        const xml = this.fetch("sitemap.xml");
         return { posts, xml };
-      })
+      });
   }
 </script>
 
 <script>
   import { onMount } from "svelte";
-  import { posts as postStore, chunkedPosts as chunkedPostsStore} from "../stores";
+  import {
+    posts as postStore,
+    chunkedPosts as chunkedPostsStore,
+  } from "../stores";
   import Pagination from "../components/Pagination.svelte";
 
   export let posts;
@@ -21,47 +24,41 @@
     postStore.set(posts);
   });
 
-  chunkedPostsStore.subscribe(value => {
+  chunkedPostsStore.subscribe((value) => {
     chunkedPosts = value;
   });
 </script>
 
 <svelte:head>
-  <title>Nusendra Hanggarawan - Software Engineer</title>
+  <title>Nusendra Hanggarawan - Software Developer</title>
 </svelte:head>
 
-<div class="container">
-  <div class="small">
-    <div class="column home-description">
-      <div class="full">
-        <p>
-          I'm a software engineer who worked mostly with JavaScript language,
-          Frontend and Backend. Sometimes I code in PHP too, using Lumen
-          framework to build an API Services.
-        </p>
+{#each chunkedPosts as { title, printDate, slug, description, tags }, index}
+  <div class="max-w-8xl px-10 py-6 bg-white rounded-lg shadow-md mb-5">
+    <div class="flex justify-between">
+      <span class="font-light text-gray-600">{printDate}</span>
+      <div>
+        {#each tags as tag}
+          <span
+            class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500 mx-1">
+            {tag}
+          </span>
+        {/each}
       </div>
     </div>
-    <div class="column">
-      <div class="label with-spacing">
-        BLOG POSTS
-        <div class="wide">
-          {#each chunkedPosts as { title, printDate, slug }, index}
-            <div class="blog-title">
-              <a href="post/{slug}">{printDate} {title}</a>
-            </div>
-          {/each}
-        </div>
-      </div>
+    <div class="mt-2">
+      <a
+        href="post/{slug}"
+        class="text-2xl text-gray-700 font-bold hover:underline">{title}</a
+      >
+      <p class="mt-2 text-gray-600">
+        {description}
+      </p>
     </div>
-    <p>
-    <hr />
-    <Pagination posts={posts}/>
+    <div class="flex justify-between items-center mt-4">
+      <a href="post/{slug}" class="text-blue-500 hover:underline">Read more</a>
+    </div>
   </div>
-</div>
+{/each}
 
-<style>
-.home-description {
-  margin-top: -70px;
-  margin-bottom: 40px;
-}
-</style>
+<Pagination {posts} />
